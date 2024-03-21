@@ -1,0 +1,45 @@
+USE temp;
+CREATE TABLE account(
+id INT PRIMARY KEY,
+Name VARCHAR(255) UNIQUE,
+balance INT,
+CONSTRAINT acc_balance_chk CHECK(balance > 1000)
+);
+INSERT INTO account
+VALUES (1, 'A', 10000);
+
+-- UNIQUE 
+INSERT INTO account
+VALUES (1, 'A', 10000);
+
+-- CONSTRAINTS check 
+
+INSERT INTO account
+VALUES (1, 'B', 100);
+DROP TABLE account;
+
+-- DEFAULT CONSTRAINT
+CREATE TABLE account(
+id INT PRIMARY KEY,
+Name VARCHAR(255) UNIQUE,
+balance INT NOT NULL DEFAULT 0
+);
+INSERT INTO account(id, Name) VALUES (1,'A');
+SELECT *FROM account;
+
+-- ADD new column
+ALTER TABLE account ADD interest FLOAT NOT NULL DEFAULT 0;
+
+-- MODIFY 
+ALTER TABLE account MODIFY interest DOUBLE NOT NULL DEFAULT 0;
+
+DESC account;
+
+-- CHANGE COLUMN - RENAME THE COLUMN
+ALTER TABLE account CHANGE COLUMN interest saving_interest FLOAT NOT NULL DEFAULT 0;
+
+-- DROP COLUMN
+ALTER TABLE account DROP COLUMN saving_interest;
+
+-- RENAME TABLE
+ALTER TABLE account RENAME TO account_details;
